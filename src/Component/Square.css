@@ -1,0 +1,11 @@
+.square {
+    min-width: 36px;
+    min-height: 36px;
+    border: 1px solid gray;
+    margin-top: -3px;
+    margin-left: -1px;
+}
+
+.square:hover {
+    background: rgb(179, 179, 179);
+}
