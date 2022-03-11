@@ -20,7 +20,6 @@ rules: {
   'react/jsx-filename-extension': [1, { "extensions": [".js", ".jsx", ".tsx"] }],
   'react/function-component-definition': [2, { "namedComponents": "arrow-function" }],
   'react/prop-types': "off",
-  'arrow-body-style': ["error", "always"],
   'import/no-unresolved': "off",
   'import/extensions': "off",
   'object-curly-newline': "off",

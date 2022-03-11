@@ -1,10 +1,15 @@
-import React from 'react';
-
-let time: number = 120;
-const timer = setInterval(() => { time -= 1; }, 1000);
+import React, { useState, useEffect } from 'react';
 
 const Timer: React.VFC = () => {
-    if (time === 0) { clearInterval(timer); }
+    let timer: any = null;
+    const [time, setTime] = useState(10);
+    const clear = () => {
+        if (time === 0) { clearInterval(timer); }
+        setTime((prevTime) => prevTime - 1);
+    };
+    useEffect(() => {
+        timer = setInterval(clear, 1000);
+    }, []);
 
     return (
         <div className="timer">

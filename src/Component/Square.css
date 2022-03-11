@@ -1,11 +1,13 @@
 .square {
     min-width: 36px;
     min-height: 36px;
-    border: 1px solid gray;
+    border: 1px solid darkgray;
+    background: #86e0499a;
     margin-top: -3px;
     margin-left: -1px;
+    text-align: center;
 }
 
 .square:hover {
-    background: rgb(179, 179, 179);
+    filter: hue-rotate(90deg);
 }

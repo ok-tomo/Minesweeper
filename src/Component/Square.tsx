@@ -7,22 +7,22 @@ type Props = {
 }
 
 const Square: React.VFC<Props> = ({ status }) => {
-    const [isFlag, setFlag] = useState(false);
+    const [isFlagged, setFlag] = useState(false);
     const [color, setColor] = useState({});
     const buiredObjects = (status === -1) ? <FaBomb /> : null;
     const handleOnContextMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
-        setFlag(!isFlag);
+        setFlag(!isFlagged);
     };
     const handleOnClick = () => {
-        if (!isFlag) {
+        if (!isFlagged) {
             setColor({ background: 'white' });
         }
     };
 
     return (
         <button className="square" type="button" style={color} onClick={handleOnClick} onContextMenu={handleOnContextMenu}>
-            {(isFlag) ? <FaFlag /> : buiredObjects}
+            {(isFlagged) ? <FaFlag /> : buiredObjects}
         </button>
     );
 };
