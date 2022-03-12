@@ -1,11 +1,15 @@
 .square {
-    min-width: 36px;
-    min-height: 36px;
-    border: 1px solid darkgray;
+    width: 36px;
+    height: 36px;
+    border: 1px solid #b3b3b3;
     background: #86e0499a;
-    margin-top: -3px;
+    margin-top: -1px;
     margin-left: -1px;
     text-align: center;
+    font-size: 1rem;
+    line-height: 36px;
+    padding: 0;
+    float: left;
 }
 
 .square:hover {

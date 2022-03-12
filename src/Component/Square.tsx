@@ -7,22 +7,38 @@ type Props = {
 }
 
 const Square: React.VFC<Props> = ({ status }) => {
-    const [isFlagged, setFlag] = useState(false);
-    const [color, setColor] = useState({});
-    const buiredObjects = (status === -1) ? <FaBomb /> : null;
+    const [isFlagged, setFlag] = useState<boolean>(false);
+    const [isOpened, setOpen] = useState<boolean>(false);
+    const [color, setColor] = useState<{[key: string]: string}>({});
+    // 右クリック：旗トグル
     const handleOnContextMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
+        // コンテキストメニューの非表示
         event.preventDefault();
-        setFlag(!isFlagged);
-    };
-    const handleOnClick = () => {
-        if (!isFlagged) {
-            setColor({ background: 'white' });
+        if (!isOpened) {
+            setFlag(!isFlagged);
         }
+    };
+    // 左クリック：開放
+    const handleOnClick = () => {
+        if (!isFlagged && !isOpened) {
+            setColor({ background: 'white' });
+            setOpen(true);
+        }
+    };
+
+    const buiredObj = () => {
+        if (isFlagged) { return <FaFlag color="red" />; }
+        if (isOpened) {
+            if (status > 0) { return status; }
+            if (status === -1) { return <FaBomb />; }
+        }
+
+        return null;
     };
 
     return (
         <button className="square" type="button" style={color} onClick={handleOnClick} onContextMenu={handleOnContextMenu}>
-            {(isFlagged) ? <FaFlag /> : buiredObjects}
+            { buiredObj() }
         </button>
     );
 };
