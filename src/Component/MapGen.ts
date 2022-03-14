@@ -28,7 +28,8 @@ const bombCount = (map: number[][]) => {
 };
 
 const bombGen = (size: number, bombs: number) => {
-    const map = [...Array(size)].map(() => new Array(size).fill(0));
+    // mapの初期化
+    const map = [...Array(size)].map(() => Array(size).fill(0));
     const bombPoint: number[][] = Array(0);
     let n: number = bombs;
 

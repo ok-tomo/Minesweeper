@@ -4,9 +4,11 @@ import './Square.css';
 
 type Props = {
    status : number
+   countFlaggedBomb: any
+   countOpenedSquare: any
 }
 
-const Square: React.VFC<Props> = ({ status }) => {
+const Square: React.VFC<Props> = ({ status, countFlaggedBomb, countOpenedSquare }) => {
     const [isFlagged, setFlag] = useState<boolean>(false);
     const [isOpened, setOpen] = useState<boolean>(false);
     const [color, setColor] = useState<{[key: string]: string}>({});
@@ -15,17 +17,23 @@ const Square: React.VFC<Props> = ({ status }) => {
         // コンテキストメニューの非表示
         event.preventDefault();
         if (!isOpened) {
-            setFlag(!isFlagged);
+            const flag = !isFlagged;
+            if (flag && (status === -1)) {
+                countFlaggedBomb(1);
+            } else if (!flag && status === -1) { countFlaggedBomb(-1); }
+
+            setFlag(flag);
         }
     };
     // 左クリック：開放
     const handleOnClick = () => {
         if (!isFlagged && !isOpened) {
+            countOpenedSquare(status);
             setColor({ background: 'white' });
             setOpen(true);
         }
     };
-
+    // 表示オブジェクトの選択
     const buiredObj = () => {
         if (isFlagged) { return <FaFlag color="red" />; }
         if (isOpened) {

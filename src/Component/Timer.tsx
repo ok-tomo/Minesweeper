@@ -1,15 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+
+let timer: any = null;
 
 const Timer: React.VFC = () => {
-    let timer: any = null;
-    const [time, setTime] = useState(2);
-    const clear = () => {
-        const nowTime: number = time - 1;
-        setTime(nowTime);
-        if (time === -1) { clearInterval(timer); }
-    };
+    const limit: number = 120;
+    const [time, setTime] = useState<number>(limit);
+    const refTime = useRef(time);
+
     useEffect(() => {
-        timer = setInterval(clear, 1000);
+        refTime.current = time;
+        if (refTime.current <= 0) {
+            clearInterval(timer);
+        }
+    }, [time]);
+
+    useEffect(() => {
+        timer = setInterval(() => setTime(refTime.current - 1), 1000);
     }, []);
 
     return (
