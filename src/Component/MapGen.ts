@@ -3,7 +3,6 @@ const bombCount = (map: number[][]) => {
     const newMap: number[][] = map;
     const size = map.length;
 
-    // O(size ^ 2)
     for (let y = 0; y < size; y += 1) {
         for (let x = 0; x < size; x += 1) {
             if (newMap[y][x] >= 0) { continue; }

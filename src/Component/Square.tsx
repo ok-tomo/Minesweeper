@@ -3,10 +3,10 @@ import { FaBomb, FaFlag } from 'react-icons/fa';
 import './Square.css';
 
 type Props = {
-   status : number
-   countFlaggedBomb: any
-   countOpenedSquare: any
-}
+   status : number;
+   countFlaggedBomb: any;
+   countOpenedSquare: any;
+};
 
 const Square: React.VFC<Props> = ({ status, countFlaggedBomb, countOpenedSquare }) => {
     const [isFlagged, setFlag] = useState<boolean>(false);

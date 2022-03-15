@@ -3,33 +3,28 @@ import './Board.css';
 import Square from './Square';
 import mapGen from './MapGen';
 
-const Board: React.VFC = () => {
-    const size: number = 10;
+type Props = {
+    size: number;
+    checkGameState: any;
+};
+
+const Board: React.VFC<Props> = ({ size, checkGameState }) => {
     const bombs: number = Math.floor((size * size) * (15 / 100));
     const map = mapGen(size, bombs);
+    let opened: number = 0;
     let flaggedBomb: number = 0;
-    let openedSquare: number = 0;
-
-    // ゲームの状態を管理: [ゲームクリア, ゲームオーバー]
-    const checkGameFinish = (isClickedBomb: boolean = false) => {
-        if ((size * size) === (flaggedBomb + openedSquare)) {
-            alert('Game Clear');
-        } else if (isClickedBomb) {
-            alert('Game Over');
-        }
-    };
 
     // 爆弾の場所に旗が立てられている数を数える
     const countFlaggedBomb = (count: number) => {
         flaggedBomb += count;
-        checkGameFinish();
+        checkGameState(opened, flaggedBomb);
     };
 
     // 開かれた場所の数を数え、もし爆弾だった場合はゲームオーバーさせる
     const countOpenedSquare = (n: number) => {
-        if (n !== -1) { openedSquare += 1; }
-        const isClickedBomb = (n === -1);
-        checkGameFinish(isClickedBomb);
+        if (n !== -1) { opened += 1; }
+        const isExploded = (n === -1);
+        checkGameState(opened, flaggedBomb, isExploded);
     };
 
     // 盤の生成

@@ -2,10 +2,14 @@ import React from 'react';
 import Timer from './Timer';
 import './StatusBar.css';
 
-const StatusBar: React.VFC = () => {
+type Props = {
+    timeOut: any;
+};
+
+const StatusBar: React.VFC<Props> = ({ timeOut }) => {
     return (
         <div className="bar">
-            <Timer />
+            <Timer timeOut={timeOut} />
         </div>
     );
 };
