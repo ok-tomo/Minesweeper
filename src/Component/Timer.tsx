@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import './Timer.css';
 
 let timer: any = null;
 
@@ -25,7 +26,7 @@ const Timer: React.VFC<Props> = ({ timeOut }) => {
 
     const minuts = Math.floor(time / 60);
     const seconds = time - (minuts * 60);
-    const displayTime = (seconds >= 10) ? `${minuts} : ${seconds}` : `${minuts} : 0${seconds}`;
+    const displayTime = (seconds >= 10) ? `${minuts}:${seconds}` : `${minuts}:0${seconds}`;
 
     return (
         <div className="timer">
