@@ -5,13 +5,14 @@ import './StatusBar.css';
 
 type Props = {
     timeOut: any;
+    sizeUpdate: any;
 };
 
-const StatusBar: React.VFC<Props> = ({ timeOut }) => {
+const StatusBar: React.VFC<Props> = ({ timeOut, sizeUpdate }) => {
     return (
         <div className="bar">
             <Timer timeOut={timeOut} />
-            <SizeInput />
+            <SizeInput sizeUpdate={sizeUpdate} />
         </div>
     );
 };

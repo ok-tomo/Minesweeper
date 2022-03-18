@@ -3,17 +3,25 @@ import Input from '@mui/material/Input';
 import './SizeInput.css';
 import { FaTimes } from 'react-icons/fa';
 
-const SizeInput: React.VFC = () => {
+type Props = {
+    sizeUpdate: any;
+};
+
+const SizeInput: React.VFC<Props> = ({ sizeUpdate }) => {
     const [size, setSize] = useState(10);
     const changeSize = (event: React.ChangeEvent<HTMLInputElement>) => {
         const inputValue: number = Number(event.target.value);
         const maxSize: number = 25;
+        const nowSize: number = size;
 
         if (!Number.isNaN(inputValue) && inputValue <= maxSize) {
             setSize(Number(inputValue));
-            console.log(inputValue);
+            sizeUpdate(inputValue);
         } else if (inputValue > maxSize) {
             setSize(maxSize);
+            sizeUpdate(maxSize);
+        } else {
+            setSize(nowSize);
         }
     };
 
@@ -22,12 +30,17 @@ const SizeInput: React.VFC = () => {
             <Input
                 className="sizeInput"
                 placeholder="Size"
-                defaultValue={size}
+                value={size}
                 onChange={(event: any) => changeSize(event)}
                 inputProps={{ style: { textAlign: 'center' } }}
             />
             <div className="sizeTimes"><FaTimes /></div>
-            <Input className="sizeInput" disabled value={size} />
+            <Input
+                className="sizeInput"
+                disabled
+                value={size}
+                inputProps={{ style: { textAlign: 'center' } }}
+            />
         </div>
     );
 };
